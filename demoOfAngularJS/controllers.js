@@ -33,7 +33,7 @@ function PhoneListCtrlRemote($scope, $http) {
 
 
 function PhoneDetailCtrl($scope, $routeParams) {
-  $scope.phoneId = $routeParams.phoneId;
+  $scope.name = $routeParams.name;
 }
  
 //PhoneDetailCtrl.$inject = ['$scope', '$routeParams'];

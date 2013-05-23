@@ -1,4 +1,6 @@
-angular.module('phonecat', []).
+//angular.module('phonecat', ['phonecatFilters', 'phonecatServices']).
+angular.module('phonecat', ['phonecatFilters']).
+
   config(['$routeProvider', function($routeProvider) {
   $routeProvider.
       when('/phones', {templateUrl: 'phone-list.html',   controller: PhoneListCtrl}).

@@ -32,8 +32,38 @@ function PhoneListCtrlRemote($scope, $http) {
 //PhoneListCtrl.$inject = ['$scope', '$http'];
 
 
-function PhoneDetailCtrl($scope, $routeParams) {
-  $scope.name = $routeParams.name;
+
+function PhoneDetailCtrl($scope, $routeParams, $http) {
+  $http.get('phones/' + $routeParams.phoneId + '.json').success(function(data) {
+    $scope.phone = data;
+    $scope.mainImageUrl = data.images[0];
+  });
+ 
+  $scope.setImage = function(imageUrl) {
+    $scope.mainImageUrl = imageUrl;
+  }
 }
  
-//PhoneDetailCtrl.$inject = ['$scope', '$routeParams'];
+//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', '$http'];
+
+//使用自定义的Service获得数据
+function PhoneListCtrlREST($scope, Phone) {
+  $scope.phones = Phone.query();
+  $scope.orderProp = 'age';
+}
+ 
+//PhoneListCtrl.$inject = ['$scope', 'Phone'];
+ 
+ 
+ 
+function PhoneDetailCtrlREST($scope, $routeParams, Phone) {
+  $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
+    $scope.mainImageUrl = phone.images[0];
+  });
+ 
+  $scope.setImage = function(imageUrl) {
+    $scope.mainImageUrl = imageUrl;
+  }
+}
+ 
+//PhoneDetailCtrl.$inject = ['$scope', '$routeParams', 'Phone'];
